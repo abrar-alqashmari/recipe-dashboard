@@ -45,29 +45,32 @@ function SignUp() {
   const signUp = () => {
 
 
-        const firstname = firstNameRef.current.querySelector('input[type=text]').value
-        const lastname = lastNameRef.current.querySelector('input[type=text]').value
+        const first_name = firstNameRef.current.querySelector('input[type=text]').value
+        const last_name = lastNameRef.current.querySelector('input[type=text]').value
         const username = userNameRef.current.querySelector('input[type=text]').value
         const email = emailRef.current.querySelector('input[type=email]').value
-        const pass = passwordRef.current.querySelector('input[type=password]').value
+        const password = passwordRef.current.querySelector('input[type=password]').value
+        const isAdmin = "Admin"
+
+        // var formdata = new FormData();
+        // formdata.append("first_name", firstname);
+        // formdata.append("last_name", lastname);
+        // formdata.append("username", username);
+        // formdata.append("email", email);
+        // formdata.append("password", pass);
+        // formdata.append("isAdmin", Admin);
+        // console.log(formdata)
 
 
-        var formdata = new FormData();
-        formdata.append("first_name", firstname);
-        formdata.append("last_name", lastname);
-        formdata.append("username", username);
-        formdata.append("email", email);
-        formdata.append("password", pass);
-        formdata.append("isAdmin", pass);
-        console.log(formdata)
-
-
-        fetch(`${process.env.REACT_APP_API_URL}users/signup`, {
+        fetch(`${process.env.REACT_APP_API_URL}admin/createAdmin`, {
             method: 'POST',
             body: JSON.stringify({
-              // first_name,
-              // last_name,
-              // username
+              first_name,
+              last_name,
+              username,
+              email,
+              password,
+              isAdmin
             }),
             headers:{
               'Content-Type': 'application/json',

@@ -25,17 +25,22 @@ function User() {
     const [rows, setRows] = useState([])
     const ctx = useContext(AuthContext)
 
-    const deleteUser = (User_id) => {
+    const updateUser = (User_id, isActive) => {
         if (window.confirm('Are you sure')) {
-            fetch(`${process.env.REACT_APP_API_URL}admin/deleteUser/${User_id}`, {
-                method: "DELETE",
+            fetch(`${process.env.REACT_APP_API_URL}admin/isActiveUpdate/${User_id}`, {
+                method: "PUT",
+                body:JSON.stringify({
+                    isActive
+                } 
+                ),
+
 				headers: {
-					Authorization: "Bearer " + ctx.token,
+					Authorization: "Bearer " + ctx.token, 'Content-Type' : 'application/json'
 				  },
             }).then(response => {
                 response.json()
-                    .then(deleted => {
-                        console.log(deleted)
+                    .then(result => {
+                        console.log(result)
                     })
             })
             .catch(e => e)
@@ -56,8 +61,11 @@ function User() {
                             name: <>{User.first_name} {User.last_name}</>,
                             email: <>{User.email}</>,
                             actions: <>
-                                <MDButton variant="text" color="error" onClick={() => {deleteUser(User.id)}}>
-                                    <Icon>delete</Icon>&nbsp;delete
+                                <MDButton variant="text" color="error" onClick={() => {updateUser(User.id,0)}}>
+                                    <Icon>isActive</Icon>&nbsp;isActive
+                                </MDButton>
+                                <MDButton variant="text" color="error" onClick={() => {updateUser(User.id,1)}}>
+                                    <Icon>notActive</Icon>&nbsp;notActive
                                 </MDButton>
                                 {/* <Link to={`/Users/edit/${User.id}`}>
                                     <MDButton variant="text" color="info">
