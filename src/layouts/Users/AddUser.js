@@ -55,7 +55,7 @@ function AddUser() {
 
 
         console.log(formdata)
-        fetch(`${process.env.REACT_APP_API_URL}users`, {
+        fetch(`${process.env.REACT_APP_API_URL}Users`, {
             method: 'POST',
             headers: {
                 'Authorization': 'Bearer ' + ctx.token

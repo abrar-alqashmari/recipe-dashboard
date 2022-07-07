@@ -56,6 +56,22 @@ function Dashboard() {
 
 	}, [])
 
+  useEffect(() => {
+		fetch(`${process.env.REACT_APP_API_URL}admin/getUsers`,{
+      headers: {
+        'Authorization': 'Bearer ' + ctx.token
+    },
+    })
+
+			.then(response => {
+				response.json().then(user => {
+					console.log(user.data.length, "bbbb")
+          setUsers(user?.data)
+				})
+			})
+
+	}, [])
+
   // useEffect(() => {
 	// 	fetch(`${process.env.REACT_APP_API_URL}admin/getUsers`, {
 	// 		headers: {
@@ -71,6 +87,9 @@ function Dashboard() {
 
   console.log("recipesrecipesrecipes", recipes.length)
   const recipeN = recipes.length
+
+  console.log("usersusersusers", users.length)
+  const usersN = users.length
 
   // console.log("usersusersuser", users.length)
   // const usersN = users.length
@@ -100,7 +119,7 @@ function Dashboard() {
               <ComplexStatisticsCard
                 icon="account_circle"
                 title="Users"
-                count={5}
+                count={usersN}
                 percentage={{
                   color: "success",
                   // amount: "+3%",
@@ -181,7 +200,7 @@ function Dashboard() {
             </Grid>
           </Grid>
         </MDBox>
-        <MDBox>
+        {/* <MDBox>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6} lg={8}>
               <Projects />
@@ -190,7 +209,7 @@ function Dashboard() {
               <OrdersOverview />
             </Grid>
           </Grid>
-        </MDBox>
+        </MDBox> */}
       </MDBox>
       <Footer />
     </DashboardLayout>

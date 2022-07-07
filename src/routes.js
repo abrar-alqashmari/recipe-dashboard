@@ -51,15 +51,19 @@ import Icon from "@mui/material/Icon";
 import Categories from "layouts/categories";
 import AddCategory from "layouts/categories/AddCategory";
 import EditCategory from "layouts/categories/EditCategory";
-import Admins from "layouts/admins";
-import AddAdmin from "layouts/admins/AddAdmin";
-import EditAdmin from "layouts/admins/EditAdmin";
+// import Admins from "layouts/admins";
+// import AddAdmin from "layouts/admins/AddAdmin";
+// import EditAdmin from "layouts/admins/EditAdmin";
 import User from "layouts/Users";
 import AddUser from "layouts/Users/AddUser";
 import EditUser from "layouts/Users/EditUser";
-import Recipe from "layouts/Recipes"
+import Recipe from "layouts/Recipes";
 import AddRecipe from "layouts/Recipes/AddRecipe";
 import EditRecipe from "layouts/Recipes/EditRecipe";
+import Ingredients from "layouts/Ingredients";
+import AddIngredients from "layouts/Ingredients/AddIngredients";
+import EditIngredients from "layouts/Ingredients/EditIngredients";
+import Show from "layouts/Recipes/Show";
 
 const routes = [
   {
@@ -98,7 +102,7 @@ const routes = [
     key: "edit-user",
     icon: <Icon fontSize="small">grid_on</Icon>,
     route: "/places/edit/:id",
-    component: <EditUser/>,
+    component: <EditUser />,
     requiresAuth: true,
     inSideNav: false,
   },
@@ -126,31 +130,40 @@ const routes = [
     requiresAuth: true,
     inSideNav: false,
   },
+
+  // {
+  //   type: "collapse",
+  //   name: "ingredients",
+  //   key: "ingredients",
+  //   icon: <Icon fontSize="small">food_bank</Icon>,
+  //   route: "/ingredients",
+  //   component: <Ingredients />,
+  //   requiresAuth: true,
+  //   inSideNav: true,
+  // },
+
   {
-    type: "collapse",
-    name: "Admins",
-    key: "admins",
-    icon: <Icon fontSize="small">people</Icon>,
-    route: "/admins",
-    component: <Admins />,
-    requiresAuth: true,
-    inSideNav: true,
-  },
-  {
-    key: "add-admin",
-    route: "/admins/add",
-    component: <AddAdmin />,
+    key: "add-ingredients",
+    route: "/ingredients/add",
+    component: <AddIngredients />,
     requiresAuth: true,
     inSideNav: false,
   },
   {
-    key: "add-admin",
-    route: "/admins/edit/:id",
-    component: <EditAdmin />,
+    key: "Show-ingredients",
+    route: "/ingredients/show/:id",
+    component: <Show />,
     requiresAuth: true,
     inSideNav: false,
   },
 
+  {
+    key: "add-ingredients",
+    route: "/Ingredients/edit/:id",
+    component: <EditIngredients />,
+    requiresAuth: true,
+    inSideNav: false,
+  },
   {
     type: "collapse",
     name: "users",
@@ -164,7 +177,7 @@ const routes = [
 
   {
     key: "add-users",
-    route: "/users/add",
+    route: "/Users/add",
     component: <AddUser />,
     requiresAuth: true,
     inSideNav: false,
@@ -172,7 +185,7 @@ const routes = [
 
   {
     key: "add-user",
-    route: "/user/edit/:id",
+    route: "/Users/edit/:id",
     component: <EditUser />,
     requiresAuth: true,
     inSideNav: false,
@@ -188,12 +201,11 @@ const routes = [
 
   {
     key: "edit-recipe",
-    route: "/recipe/edit/:id",
+    route: "/recipes/edit/:id",
     component: <EditRecipe />,
     requiresAuth: true,
     inSideNav: false,
   },
-
 
   // {
   //   type: "collapse",
@@ -244,6 +256,29 @@ const routes = [
   //   component: <Profile />,
   //   requiresAuth: true,
   //   inSideNav: true,
+  // }, // {
+  //   type: "collapse",
+  //   name: "Admins",
+  //   key: "admins",
+  //   icon: <Icon fontSize="small">people</Icon>,
+  //   route: "/admins",
+  //   component: <Admins />,
+  //   requiresAuth: true,
+  //   inSideNav: true,
+  // },
+  // {
+  //   key: "add-admin",
+  //   route: "/admins/add",
+  //   component: <AddAdmin />,
+  //   requiresAuth: true,
+  //   inSideNav: false,
+  // },
+  // {
+  //   key: "add-admin",
+  //   route: "/admins/edit/:id",
+  //   component: <EditAdmin />,
+  //   requiresAuth: true,
+  //   inSideNav: false,
   // },
   {
     type: "collapse",
@@ -255,16 +290,16 @@ const routes = [
     requiresAuth: false,
     inSideNav: true,
   },
-  {
-    type: "collapse",
-    name: "Sign up",
-    key: "sign-up",
-    icon: <Icon fontSize="small">login</Icon>,
-    route: "/sign-up",
-    component: <SignUp />,
-    requiresAuth: false,
-    inSideNav: true,
-  },
+  // {
+  //   type: "collapse",
+  //   name: "Sign up",
+  //   key: "sign-up",
+  //   icon: <Icon fontSize="small">login</Icon>,
+  //   route: "/sign-up",
+  //   component: <SignUp />,
+  //   requiresAuth: false,
+  //   inSideNav: true,
+  // },
   {
     type: "collapse",
     name: "Sign Out",

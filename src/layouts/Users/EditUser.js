@@ -47,7 +47,7 @@ function Map({ center, zoom, prevState, updatePlace }) {
     }, [map])
     return (<div ref={mapRef} style={{ height: '400px' }} />)
 }
-function Edituser() {
+function EditUser() {
     const [longitude, setLongitude] = useState(28.5)
     const [latitude, setLatitude] = useState(40.5)
     const [category, setCategory] = useState(0)
@@ -217,4 +217,4 @@ function Edituser() {
         </DashboardLayout>
     )
 }
-export default Edituser
+export default EditUser

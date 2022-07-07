@@ -16,6 +16,9 @@ import { AuthContext } from "context/AuthContext";
 
 function AddCategory() {
 
+    const nameRef = useRef(null)
+    const iconRef = useRef(null)
+    const pRef = useRef(null)
     const ctx = useContext(AuthContext)
 
     const [openSnackBar, setOpenSnackBar] = useState(false)
@@ -24,29 +27,31 @@ function AddCategory() {
 
     const closeSnackBar = () => setOpenSnackBar(false);
 
-    const titleRef = useRef(null)
-    const iconRef = useRef(null)
-    const pRef = useRef(null)
+const [categories, setCategories] = useState(0);
+  const [categoriesData, setCategoriesData] = useState([]);
+
+  
 
     const addCategory = () => {
-        const categoryName = titleRef.current.querySelector('input[type=text]').value
+        const categoryName = nameRef.current.querySelector('input[type=text]').value
         const iconFile = iconRef.current.querySelector('input[type=file]').files
-        const pFile = pRef.current.querySelector('input[type=file]').files
+        const photoFile = pRef.current.querySelector('input[type=file]').files
 
         var formdata = new FormData();
         formdata.append("name", categoryName);
         formdata.append("icon", iconFile[0]);
-        formdata.append("photo", pFile[0]);
+        formdata.append("photo", photoFile[0]);
 
         fetch(`${process.env.REACT_APP_API_URL}categories/createcategory`, {
             method: 'post',
-            body: formdata,
             headers: {
                 'Authorization': 'Bearer ' + ctx.token
-            }
-        }).then(response => {
+            },
+            body: formdata,
+        })
+        .then(response => {
             response.json().then(categoryAdded => {
-                setServerResponse(categoryAdded.messages.join(' '))
+                // setServerResponse(categoryAdded.messages.join(' '))
                 if (categoryAdded.success) {
                     setSnackBarType('success')
                 } else {
@@ -54,7 +59,8 @@ function AddCategory() {
                 }
                 setOpenSnackBar(true)
             })
-        }).catch(e => e)
+        }).catch(e => e) 
+        
     }
 
     return (
@@ -67,7 +73,7 @@ function AddCategory() {
                             <MDBox pt={4} pb={3} px={3}>
                                 <MDBox component="form" role="form">
                                     <MDBox mb={2}>
-                                        <MDInput  ref={titleRef} type="text" label="Category Name" variant="standard" fullWidth />
+                                        <MDInput  ref={nameRef} type="text" label="Category Name" variant="standard" fullWidth />
                                     </MDBox>
                                     
                                     <MDBox mb={2}>

@@ -1,63 +1,65 @@
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
-import { useEffect, useState, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import Icon from "@mui/material/Icon";
 import MDButton from "components/MDButton";
-
-import { AuthContext } from "context/AuthContext";
 import { Link } from "react-router-dom";
+import { AuthContext } from "context/AuthContext";
+
 
 const columns = [
     { Header: "name", accessor: "name", width: "45%", align: "left" },
-    { Header: "photo", accessor: "photo", align: "left" },
-    { Header: "icon", accessor: "icon", align: "left" },
+    { Header: "description", accessor: "description", align: "left" },
     { Header: "actions", accessor: "actions", align: "center" },
 ]
-// const rows = []
 
-function Categories() {
+
+function Ingredients() {
+
     const [rows, setRows] = useState([])
     const ctx = useContext(AuthContext)
 
-    const deleteCategory = (categoryId) => {
+    const deleteIngredients = (Recipe_id) => {
         if (window.confirm('Are you sure')) {
-            fetch(`${process.env.REACT_APP_API_URL}categories/${categoryId}`, {
+            fetch(`${process.env.REACT_APP_API_URL}ingredients/${Recipe_id}`, {
                 method: "DELETE",
-                headers: {
-                    'Authorization': 'Bearer ' + ctx.token
-                }
+				headers: {
+					Authorization: "Bearer " + ctx.token,
+				  },
             }).then(response => {
                 response.json()
                     .then(deleted => {
                         console.log(deleted)
                     })
             })
-                .catch(e => e)
+            .catch(e => e)
         }
     }
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}categories`)
+        fetch(`${process.env.REACT_APP_API_URL}ingredients/`, {
+            headers: {
+                'Authorization': 'Bearer ' + ctx.token
+            }
+        })
             .then(response => {
-                response.json().then(categories => {
-                    const allCategories = categories.data.map((category) => {
+                response.json().then(Ingredients => {
+                    console.log(Ingredients, "vvvvvvvvv")
+                    const allIngredients = Ingredients.data.map((Ingredients) => {
                         return {
-                            name: <>{category.name}</>,
-                                photo: <><img src={category.photo} width="80" /></>,
-                                icon: <><img src={category.icon} width="80" /></>,
+                            name: <>{Ingredients.name}</>,
+                            description: <>{Ingredients.description}</>,
                             actions: <>
-                                {/* <MDButton variant="text" color="error" onClick={() => { deleteCategory(category.id) }}>
+                                <MDButton variant="text" color="error" onClick={() => {deleteIngredients(Ingredients.id)}}>
                                     <Icon>delete</Icon>&nbsp;delete
-                                </MDButton> */}
-                                <Link to={`/categories/edit/${category.id}`}>
+                                </MDButton>
+                                <Link to={`/Ingredients/edit/${Ingredients.id}`}>
                                     <MDButton variant="text" color="info">
                                         <Icon>edit</Icon>&nbsp;edit
                                     </MDButton>
@@ -65,10 +67,12 @@ function Categories() {
                             </>,
                         }
                     })
-                    setRows(allCategories)
+                    setRows(allIngredients)
                 })
             })
     }, [])
+
+
     return (
         <DashboardLayout>
             <DashboardNavbar />
@@ -93,15 +97,14 @@ function Categories() {
                                     alignItems="center"
                                 >
                                     <MDTypography variant="h6" color="white">
-                                        Categories Table
+                                    Ingredients Table
                                     </MDTypography>
-                                    <Link to='/categories/add'>
+                                    <Link to='/Users/add'>
                                         <MDButton variant="text">
                                             <Icon>add_circle</Icon>&nbsp;Add
                                         </MDButton>
                                     </Link>
                                 </Grid>
-
                             </MDBox>
                             <MDBox pt={3}>
                                 <DataTable
@@ -120,5 +123,4 @@ function Categories() {
         </DashboardLayout>
     );
 }
-
-export default Categories;
+export default Ingredients;

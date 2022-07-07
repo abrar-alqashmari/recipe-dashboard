@@ -74,8 +74,8 @@ function Basic() {
 			response.json().then(loggedIn => {
 				
 			if (loggedIn.success) {
-			ctx.login(loggedIn.token)
-			window.localStorage.setItem("token", loggedIn.token)
+			ctx.login(loggedIn.data.token)
+			window.localStorage.setItem("token", loggedIn.data.token)
 					navigate('/dashboard')
 			}
 			})
