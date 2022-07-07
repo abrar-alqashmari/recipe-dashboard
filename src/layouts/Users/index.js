@@ -61,11 +61,11 @@ function User() {
                             name: <>{User.first_name} {User.last_name}</>,
                             email: <>{User.email}</>,
                             actions: <>
-                                <MDButton variant="text" color="error" onClick={() => {updateUser(User.id,0)}}>
-                                    <Icon>isActive</Icon>&nbsp;isActive
+                                <MDButton variant="text" color="success" onClick={() => {updateUser(User.id,0)}}>
+                                    <Icon>toggle_on</Icon>&nbsp;IsActive
                                 </MDButton>
                                 <MDButton variant="text" color="error" onClick={() => {updateUser(User.id,1)}}>
-                                    <Icon>notActive</Icon>&nbsp;notActive
+                                    <Icon>toggle_off</Icon>&nbsp;DeActivate
                                 </MDButton>
                                 {/* <Link to={`/Users/edit/${User.id}`}>
                                     <MDButton variant="text" color="info">
