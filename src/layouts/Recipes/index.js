@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 
 const columns = [
   { Header: "name", accessor: "name", width: "45%", align: "left" },
-  { Header: "description", accessor: "description", align: "center" },
+  // { Header: "description", accessor: "description", align: "center" },
   { Header: "recipe_photo", accessor: "recipe_photo", align: "center" },
   { Header: "background_photo", accessor: "background_photo", align: "center" },
   { Header: "youtube_video", accessor: "youtube_video", align: "center" },
@@ -24,6 +24,7 @@ const columns = [
 function Recipe() {
   const [rows, setRows] = useState([]);
   const ctx = useContext(AuthContext);
+  const [showMore, setShowMore] = useState(false);
 
   const deleteRecipe = (Recipe_id) => {
     if (window.confirm("Are you sure")) {
@@ -65,12 +66,23 @@ function Recipe() {
           console.log(Recipe, "jjjjjjjjj");
           return {
             name: <>{Recipe.name}</>,
-            description: <>{Recipe.description}</>,
+            // description: (
+            //   <>
+            //     {Recipe.description}
+            //   </>
+            // ),
             recipe_photo: <img src={Recipe.recipe_photo} width="80px" />,
             background_photo: (
               <img src={Recipe.background_photo} width="80px" />
             ),
-            youtube_video: <a href={Recipe.youtube_video}>Click Me</a>,
+            youtube_video: (
+              <a
+                href={`https://www.youtube.com/embed/${Recipe?.youtube_video}`}
+              >
+                Click Me
+              </a>
+            ),
+
             actions: (
               <>
                 <MDButton
@@ -83,11 +95,11 @@ function Recipe() {
                 >
                   <Icon>delete</Icon>&nbsp;delete
                 </MDButton>
-                {/* <Link to={`/recipes/edit/${Recipe.id}`}>
+                <Link to={`/recipes/add${Recipe.id}`}>
                   <MDButton variant="text" color="info">
-                    <Icon>edit</Icon>&nbsp;edit
+                    {/* <Icon>edit</Icon>&nbsp;edit */}
                   </MDButton>
-                </Link> */}
+                </Link>
                 <Link to={`/ingredients/show/${Recipe.id}`}>
                   <MDButton variant="text" color="info">
                     <Icon onClick={show}>visibility</Icon>&nbsp;show
@@ -127,11 +139,11 @@ function Recipe() {
                   <MDTypography variant="h6" color="white">
                     recipe Table
                   </MDTypography>
-                  {/* <Link to="/recipes/add">
+                  <Link to="/recipes/add">
                     <MDButton variant="text">
-                      <Icon>add_circle</Icon>&nbsp;Add
+                      {/* <Icon>add_circle</Icon>&nbsp;Add */}
                     </MDButton>
-                  </Link> */}
+                  </Link>
                 </Grid>
               </MDBox>
               <MDBox pt={3}>

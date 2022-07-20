@@ -21,6 +21,7 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 
 import MenuItem from '@mui/material/MenuItem';
+import { useNavigate } from "react-router-dom"
 
 
 function AddUser() {
@@ -30,6 +31,7 @@ function AddUser() {
     const userNameRef = useRef(null)
     const emailRef = useRef(null)
     const passRef = useRef(null)
+    const isAdminRef = useRef(null)
 
 
     const ctx = useContext(AuthContext)
@@ -37,36 +39,53 @@ function AddUser() {
     const [snackBarType, setSnackBarType] = useState("success")
     const [openSnackBar, setOpenSnackBar] = useState(false)
     const closeSnackBar = () => setOpenSnackBar(false);
+    const navigate = useNavigate()
 
     const saveuser = () => {
         const firstname = firstNameRef.current.querySelector('input[type=text]').value
         const lastname = lastNameRef.current.querySelector('input[type=text]').value
+        console.log(userNameRef,"userNameRef")
         const username = userNameRef.current.querySelector('input[type=text]').value
         const email = emailRef.current.querySelector('input[type=email]').value
         const pass = passRef.current.querySelector('input[type=password]').value
+        const isAdmin = isAdminRef.current.querySelector('input[type=text]').value
+        console.log(isAdmin,"isAdmin")
+
+    
 
 
-        var formdata = new FormData();
-        formdata.append("first_name", firstname);
-        formdata.append("last_name", lastname);
-        formdata.append("username", username);
-        formdata.append("email", email);
-        formdata.append("password", pass);
+        // var formdata = new FormData();
+        // formdata.append("first_name", firstname);
+        // formdata.append("last_name", lastname);
+        // formdata.append("username", username);
+        // formdata.append("email", email);
+        // formdata.append("password", pass);
+        // formdata.append("isAdmin", isAdmin);
 
 
-        console.log(formdata)
-        fetch(`${process.env.REACT_APP_API_URL}Users`, {
+
+        // console.log(formdata)
+        fetch(`${process.env.REACT_APP_API_URL}admin/createAdmin`, {
             method: 'POST',
             headers: {
-                'Authorization': 'Bearer ' + ctx.token
+                'Authorization': 'Bearer ' + ctx.token,
+                'Content-Type' :'application/json'
             },
-            body: formdata,
+            body:JSON.stringify({
+                first_name:firstname,
+                last_name:lastname,
+                username,
+                email,
+                password:pass,
+                isAdmin
+            })
         }).then(response => response.json())
             .then(result => {
                 console.log(result)
-                setServerResponse(result.message.join(' '))
+                setServerResponse(result.messages)
                 if (result.success) {
                     setSnackBarType('success')
+                    navigate('/users')
                 } else {
                     setSnackBarType('error')
                 }
@@ -114,6 +133,9 @@ function AddUser() {
                                     </MDBox>
                                     <MDBox mb={2}>
                                         <MDInput type="email" label="Email" variant="standard" fullWidth ref={emailRef} />
+                                    </MDBox>
+                                    <MDBox mb={2}>
+                                        <MDInput type="text" label="user type" variant="standard" fullWidth ref={isAdminRef} />
                                     </MDBox>
                                     <MDBox mb={2}>
                                         <MDInput type="password" label="password" variant="standard" fullWidth ref={passRef} />

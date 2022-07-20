@@ -61,17 +61,13 @@ function User() {
                             name: <>{User.first_name} {User.last_name}</>,
                             email: <>{User.email}</>,
                             actions: <>
-                                <MDButton variant="text" color="success" onClick={() => {updateUser(User.id,0)}}>
+                                <MDButton variant="text" color="success" onClick={() => {updateUser(User.id,1)}}>
                                     <Icon>toggle_on</Icon>&nbsp;IsActive
                                 </MDButton>
-                                <MDButton variant="text" color="error" onClick={() => {updateUser(User.id,1)}}>
+                                <MDButton variant="text" color="error" onClick={() => {updateUser(User.id,0)}}>
                                     <Icon>toggle_off</Icon>&nbsp;DeActivate
                                 </MDButton>
-                                {/* <Link to={`/Users/edit/${User.id}`}>
-                                    <MDButton variant="text" color="info">
-                                        <Icon>edit</Icon>&nbsp;edit
-                                    </MDButton>
-                                </Link> */}
+                               
                             </>,
                         }
                     })
@@ -107,11 +103,11 @@ function User() {
                                     <MDTypography variant="h6" color="white">
                                     Users Table
                                     </MDTypography>
-                                    {/* <Link to='/Users/add'>
-                                        <MDButton variant="text">
+                                    <Link to='/Users/add'>
+                                        {/* <MDButton variant="text">
                                             <Icon>add_circle</Icon>&nbsp;Add
-                                        </MDButton>
-                                    </Link> */}
+                                        </MDButton> */}
+                                    </Link>
                                 </Grid>
                             </MDBox>
                             <MDBox pt={3}>

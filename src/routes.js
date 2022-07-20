@@ -183,13 +183,13 @@ const routes = [
     inSideNav: false,
   },
 
-  {
-    key: "add-user",
-    route: "/Users/edit/:id",
-    component: <EditUser />,
-    requiresAuth: true,
-    inSideNav: false,
-  },
+  // {
+  //   key: "add-user",
+  //   route: "/Users/edit/:id",
+  //   component: <EditUser />,
+  //   requiresAuth: true,
+  //   inSideNav: false,
+  // },
 
   {
     key: "add-recipe",
@@ -288,18 +288,18 @@ const routes = [
     route: "/sign-in",
     component: <SignIn />,
     requiresAuth: false,
-    inSideNav: true,
+    inSideNav: false,
   },
-  {
-    type: "collapse",
-    name: "Sign up",
-    key: "sign-up",
-    icon: <Icon fontSize="small">login</Icon>,
-    route: "/sign-up",
-    component: <SignUp />,
-    requiresAuth: false,
-    inSideNav: true,
-  },
+  // {
+  //   type: "collapse",
+  //   name: "Sign up",
+  //   key: "sign-up",
+  //   icon: <Icon fontSize="small">login</Icon>,
+  //   route: "/sign-up",
+  //   component: <SignUp />,
+  //   requiresAuth: false,
+  //   inSideNav: true,
+  // },
   {
     type: "collapse",
     name: "Sign Out",

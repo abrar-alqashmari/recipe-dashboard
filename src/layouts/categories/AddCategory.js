@@ -77,10 +77,10 @@ const [categories, setCategories] = useState(0);
                                     </MDBox>
                                     
                                     <MDBox mb={2}>
-                                        <MDInput ref={iconRef} type="file" label="Photo" variant="standard" fullWidth />
+                                        <MDInput ref={iconRef} type="file" label="icon" variant="standard" fullWidth />
                                     </MDBox>
                                     <MDBox mb={2}>
-                                        <MDInput ref={pRef} type="file" label="icon" variant="standard" fullWidth />
+                                        <MDInput ref={pRef} type="file" label="Photo" variant="standard" fullWidth />
                                     </MDBox>
                                     <MDBox mt={4} mb={1}>
                                         <MDButton variant="gradient" color="info" fullWidth onClick={addCategory}>
@@ -97,7 +97,7 @@ const [categories, setCategories] = useState(0);
             <MDSnackbar
                 color={snackBarType}
                 icon={snackBarType == 'success' ? 'check' : 'warning'}
-                title="Places App"
+                title="Recipe App"
                 content={serverResponse}
                 open={openSnackBar}
                 // onClose={closeSnackBar}

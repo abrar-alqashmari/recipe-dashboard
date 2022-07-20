@@ -164,7 +164,7 @@ function EditCategory() {
       <MDSnackbar
         color={snackBarType}
         icon={snackBarType == "success" ? "check" : "warning"}
-        title="Places App"
+        title="Recipe App"
         content={serverResponse}
         open={openSnackBar}
         // onClose={closeSnackBar}

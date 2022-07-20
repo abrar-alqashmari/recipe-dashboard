@@ -71,6 +71,7 @@ function AddRecipe() {
     formdata.append("background_photo", background_photo[0]);
     formdata.append("youtube_video", youtube_video);
     formdata.append("categories", categories);
+    
     // formdata.append("youtube_video", youtube_video);
 
     console.log(formdata);
